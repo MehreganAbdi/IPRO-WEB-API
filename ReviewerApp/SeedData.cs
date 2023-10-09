@@ -1,13 +1,14 @@
-﻿using ReviewerApp.Models;
+﻿using ReviewerApp.Data;
+using ReviewerApp.Models;
 
-namespace ReviewerApp.Data
+namespace ReviewerApp
 {
     public class SeedData
     {
         private readonly DataContext dataContext;
         public SeedData(DataContext context)
         {
-            this.dataContext = context;
+            dataContext = context;
         }
         public void SeedDataContext()
         {
