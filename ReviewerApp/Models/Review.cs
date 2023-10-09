@@ -7,5 +7,6 @@
         public string Text { get; set; }
         public Reviewer Reviewer { get; set; }
         public Pokeman Pokeman { get; set; }
+        public int Rating { get; set; }
     }
 }
