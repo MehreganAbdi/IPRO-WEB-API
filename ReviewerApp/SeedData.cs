@@ -77,37 +77,6 @@ namespace ReviewerApp
                                 Name = "Saffron City"
                             }
                         }
-                    },
-                                    new PokemanOwner()
-                                    {
-                        Pokeman = new Pokeman()
-                        {
-                            Name = "Venasuar",
-                            BirthDate = new DateTime(1903,1,1),
-                            PokemanCategories = new List<PokemanCategory>()
-                            {
-                                new PokemanCategory { Category = new Category() { Name = "Leaf"}}
-                            },
-                            Reviews = new List<Review>()
-                            {
-                                new Review { Title="Veasaur",Text = "Venasuar is the best Pokeman, because it is electric", Rating = 5,
-                                Reviewer = new Reviewer(){ Name = "Teddy", LastName = "Smith" } },
-                                new Review { Title="Veasaur",Text = "Venasuar is the best a killing rocks", Rating = 5,
-                                Reviewer = new Reviewer(){ Name = "Taylor", LastName = "Jones" } },
-                                new Review { Title="Veasaur",Text = "Venasuar, Venasuar, Venasuar", Rating = 1,
-                                Reviewer = new Reviewer(){ Name = "Jessica", LastName = "McGregor" } },
-                            }
-                        },
-                        Owner = new Owner()
-                        {
-                            Name = "Ash",
-                            LastName = "Ketchum",
-                            Gym = "Ashs Gym",
-                            Country = new Country()
-                            {
-                                Name = "Millet Town"
-                            }
-                        }
                     }
                 };
                 dataContext.PokemanOwners.AddRange(PokemanOwners);
