@@ -25,6 +25,32 @@ namespace ReviewerApp.Controllers
                 return BadRequest(ModelState);
             return Ok(pokemans);
         }
-    
+
+        [HttpGet("{pokeId}")]
+        [ProducesResponseType(200,Type = typeof(Pokeman))]
+        [ProducesResponseType(400)]
+        public IActionResult GetPokeman(int pokeId)
+        {
+            if(!_pokemanRepository.PokemanExists(pokeId))
+                    return NotFound();
+            var pokeman = _pokemanRepository.GetById(pokeId);
+            if (!ModelState.IsValid)
+                return BadRequest();
+            return Ok(pokeman);
+        }
+
+
+        [HttpGet("{pokeId}/rating")]
+        [ProducesResponseType(200, Type = typeof(int))]
+        [ProducesResponseType(400)]
+        public IActionResult GetPokemanRating(int pokeId)
+        {
+            if (!_pokemanRepository.PokemanExists(pokeId))
+                return NotFound();
+            var rating = _pokemanRepository.GetById(pokeId);
+            if (!ModelState.IsValid)
+                return BadRequest();
+            return Ok(rating);
+        }
     }
 }
