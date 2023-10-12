@@ -1,6 +1,8 @@
 
 using Microsoft.EntityFrameworkCore;
 using ReviewerApp.Data;
+using ReviewerApp.Interfaces;
+using ReviewerApp.Repository;
 
 namespace ReviewerApp
 {
@@ -16,8 +18,8 @@ namespace ReviewerApp
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddTransient<SeedData>(); 
-
+            builder.Services.AddTransient<SeedData>();
+            builder.Services.AddScoped<IPokemanRepository, PokemanRepository>();
             builder.Services.AddDbContext<DataContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
                 );
