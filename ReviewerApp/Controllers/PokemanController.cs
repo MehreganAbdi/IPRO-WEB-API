@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
+using ReviewerApp.DTOs;
 using ReviewerApp.Interfaces;
 using ReviewerApp.Models;
 
@@ -10,17 +12,19 @@ namespace ReviewerApp.Controllers
     public class PokemanController : Controller
     {
         private readonly IPokemanRepository _pokemanRepository;
+        private readonly IMapper _mapper;
 
-        public PokemanController(IPokemanRepository pokemanRepository)
+        public PokemanController(IPokemanRepository pokemanRepository , IMapper mapper)
         {
-            this._pokemanRepository = pokemanRepository;
+            _pokemanRepository = pokemanRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Pokeman>))]
         public IActionResult GetPokemans()
         {
-            var pokemans = _pokemanRepository.GetAllPokemans();
+            var pokemans = _mapper.Map<List<PokemanDTO>>(_pokemanRepository.GetAllPokemans());
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             return Ok(pokemans);
@@ -33,7 +37,7 @@ namespace ReviewerApp.Controllers
         {
             if(!_pokemanRepository.PokemanExists(pokeId))
                     return NotFound();
-            var pokeman = _pokemanRepository.GetById(pokeId);
+            var pokeman = _mapper.Map<PokemanDTO>(_pokemanRepository.GetById(pokeId));
             if (!ModelState.IsValid)
                 return BadRequest();
             return Ok(pokeman);
@@ -47,7 +51,7 @@ namespace ReviewerApp.Controllers
         {
             if (!_pokemanRepository.PokemanExists(pokeId))
                 return NotFound();
-            var rating = _pokemanRepository.GetById(pokeId);
+            var rating= _pokemanRepository.GetPokemanRating(pokeId);
             if (!ModelState.IsValid)
                 return BadRequest();
             return Ok(rating);
