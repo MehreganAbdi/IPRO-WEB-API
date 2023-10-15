@@ -44,19 +44,18 @@ namespace ReviewerApp.Controllers
             return Ok(Country);
         }
 
-
-        [HttpGet("pokeman/{countryId}")]
-        [ProducesResponseType(200, Type = typeof(IEnumerable<Owner>))]
+        [HttpGet("/owners/{ownerId}")]
         [ProducesResponseType(400)]
-        public IActionResult GetOwnersByCountryId(int countryId)
+        [ProducesResponseType(200, Type = typeof(Country))]
+        public IActionResult GetCountryOfAnOwner(int ownerId)
         {
-            var owners = _mapper.Map<List<OwnerDTO>>(
-                _countryRepository.GetOwnersFromACountry(countryId)
-                );
+            var country = _mapper.Map<CountryDTO>(
+                _countryRepository.GetCountryByOwnerId(ownerId));
 
             if (!ModelState.IsValid)
                 return BadRequest();
-            return Ok(owners);
+
+            return Ok(country);
         }
     }
 }
