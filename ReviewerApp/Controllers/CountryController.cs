@@ -22,7 +22,7 @@ namespace ReviewerApp.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(200, Type = typeof(IEnumerable<Country>))]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<CountryDTO>))]
         public IActionResult GetCountries()
         {
             var Countries = _mapper.Map<List<CountryDTO>>(_countryRepository.GetAllCountries());
@@ -32,7 +32,7 @@ namespace ReviewerApp.Controllers
         }
 
         [HttpGet("{countryId}")]
-        [ProducesResponseType(200, Type = typeof(Country))]
+        [ProducesResponseType(200, Type = typeof(CountryDTO))]
         [ProducesResponseType(400)]
         public IActionResult GetCountry(int countryId)
         {
@@ -46,7 +46,7 @@ namespace ReviewerApp.Controllers
 
         [HttpGet("/owners/{ownerId}")]
         [ProducesResponseType(400)]
-        [ProducesResponseType(200, Type = typeof(Country))]
+        [ProducesResponseType(200, Type = typeof(CountryDTO))]
         public IActionResult GetCountryOfAnOwner(int ownerId)
         {
             var country = _mapper.Map<CountryDTO>(

@@ -22,7 +22,7 @@ namespace ReviewerApp.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(200, Type = typeof(IEnumerable<Owner>))]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<OwnerDTO>))]
         public IActionResult GetOwners()
         {
             var Ownerz = _mapper.Map<List<OwnerDTO>>(_ownerRepository.GetOwners());
@@ -33,7 +33,7 @@ namespace ReviewerApp.Controllers
 
 
         [HttpGet("{ownerId}")]
-        [ProducesResponseType(200, Type = typeof(Country))]
+        [ProducesResponseType(200, Type = typeof(OwnerDTO))]
         [ProducesResponseType(400)]
         public IActionResult GetOwner(int ownerId)
         {
@@ -45,11 +45,15 @@ namespace ReviewerApp.Controllers
             return Ok(owner);
         }
 
-        [HttpGet("pokeman/{OwnerId}")]
-        [ProducesResponseType(200, Type = typeof(IEnumerable<Pokeman>))]
+        [HttpGet("{ownerId}/pokeman")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<PokemanDTO>))]
         [ProducesResponseType(400)]
         public IActionResult GetPokemanByOwner(int OwnerId)
         {
+            if (!_ownerRepository.OwnerExists(OwnerId))
+            {
+                return NotFound();
+            }
             var pokes = _mapper.Map<List<PokemanDTO>>(
                 _ownerRepository.GetPokemanByOwner(OwnerId)
                 );
@@ -60,18 +64,18 @@ namespace ReviewerApp.Controllers
         }
 
         [HttpGet("Pokeman/{PokemanId}")]
-        [ProducesResponseType(200, Type = typeof(IEnumerable<Pokeman>))]
+        [ProducesResponseType(200, Type = typeof(OwnerDTO))]
         [ProducesResponseType(400)]
         public IActionResult GetOwnerOfAPokeman(int PokemanId)
         {
-            var poke = _mapper.Map<PokemanDTO>(
+            var owner = _mapper.Map<OwnerDTO>(
                 _ownerRepository.GetOwnerOfAPokeman(PokemanId)
                 );
 
 
             if (!ModelState.IsValid)
                 return BadRequest();
-            return Ok(poke);
+            return Ok(owner);
         }
 
     }

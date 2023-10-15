@@ -27,6 +27,7 @@ namespace ReviewerApp
             builder.Services.AddScoped<IPokemanRepository, PokemanRepository>();
             builder.Services.AddScoped<ICategoryRepository,CategoryRepository>();
             builder.Services.AddScoped<ICountryRepository, CountryRepository>();
+            builder.Services.AddScoped<IOwnerRepository, OwnerRepository>();
 
 
 
