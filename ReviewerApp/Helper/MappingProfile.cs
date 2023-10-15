@@ -9,6 +9,10 @@ namespace ReviewerApp.Helper
         public MappingProfile()
         {
             CreateMap<Pokeman, PokemanDTO>();
+            CreateMap<Owner, OwnerDTO>();
+            CreateMap<Country, CountryDTO>();
+            CreateMap<Category, CategoryDTO>();
+
         }
     }
 }
