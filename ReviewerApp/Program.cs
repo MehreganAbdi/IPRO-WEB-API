@@ -25,12 +25,14 @@ namespace ReviewerApp
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddScoped<IPokemanRepository, PokemanRepository>();
-            
-            
-            
-            
-            
-            
+            builder.Services.AddScoped<ICategoryRepository,CategoryRepository>();
+            builder.Services.AddScoped<ICountryRepository, CountryRepository>();
+
+
+
+
+
+
             builder.Services.AddDbContext<DataContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
                 );
